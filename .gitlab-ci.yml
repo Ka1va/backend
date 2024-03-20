@@ -10,4 +10,5 @@ deploy:
     - chmod 700 ~/.ssh
   script:
     - ssh -o StrictHostKeyChecking=no $SSH_HOST "cd $REMOTE_PATH && pwd"
+    - pwd
     
