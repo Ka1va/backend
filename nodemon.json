@@ -1,6 +1,6 @@
 {
   "watch": ["src/*"],
-  "exec": "npm run serve",
+  "exec": "npm run  serve",
   "ext": "ts",
   "verbose": true,
   "ignore": [
