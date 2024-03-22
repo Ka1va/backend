@@ -12,6 +12,7 @@ deploy:
     - ssh -o StrictHostKeyChecking=no $SSH_HOST "cd $REMOTE_PATH && pwd"
     - ssh -o StrictHostKeyChecking=no $SSH_HOST "cd $REMOTE_PATH && git pull origin dev"
     - ssh -o StrictHostKeyChecking=no $SSH_HOST "cd $DOCKER_PATH && docker compose up -d --build server"
+    - ssh -o StrictHostKeyChecking=no $SSH_HOST "echo "Запустился пайплайн бэк" | ssmtp -C/etc/ssmtp/ssmtp.conf god.winer@yandex.ru"
   rules:
   - if: $CI_PIPELINE_SOURCE == "merge_request_event"
   - if: $CI_PIPELINE_SOURCE == "push"
