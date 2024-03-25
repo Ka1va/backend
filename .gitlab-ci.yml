@@ -14,7 +14,7 @@ deploy:
     - ssh -o StrictHostKeyChecking=no $SSH_HOST "cd $DOCKER_PATH && docker compose up -d --build server"
     - ssh -o StrictHostKeyChecking=no $SSH_HOST "echo "Запустился пайплайн бэк" | ssmtp -C/etc/ssmtp/ssmtp.conf god.winer@yandex.ru"
     - exit_code=$?
-    - if [ $exit_code -ne 0 ]; - ssh -o StrictHostKeyChecking=no $SSH_HOST "echo "Ошибка при работе пайплайна" | ssmtp -C/etc/ssmtp/ssmtp.conf god.winer@yandex.ru"; fi;
+    - if [ $exit_code -ne 0 ]; then ssh -o StrictHostKeyChecking=no $SSH_HOST "echo "Ошибка при работе пайплайна" | ssmtp -C/etc/ssmtp/ssmtp.conf god.winer@yandex.ru"; fi;
   rules:
   - if: $CI_PIPELINE_SOURCE == "merge_request_event"
   - if: $CI_PIPELINE_SOURCE == "push"
