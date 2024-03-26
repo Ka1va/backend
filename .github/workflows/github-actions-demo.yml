@@ -1,0 +1,15 @@
+name: test
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: [push]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+           mkdir -p /home/runner/.ssh
+           chmod 700 /home/runner/.ssh
+           eval $(ssh-agent -s)
+           echo "${{secrets.SSH_PRIVATE_KEY}}" | tr -d '\r' | ssh-add -
+           ssh -o StrictHostKeyChecking=no ${{vars.SSH_HOST_PATH}} "pwd"
+           ssh -o StrictHostKeyChecking=no ${{vars.SSH_HOST_PATH}} "cd ${{vars.REMOTE_PATH}} && git pull origin dev"
+           ssh -o StrictHostKeyChecking=no $SSH_HOST "cd ${{vars.DOCKER_PATH}} && docker compose up -d --build server"
