@@ -11,5 +11,5 @@ jobs:
            eval $(ssh-agent -s)
            echo "${{secrets.SSH_PRIVATE_KEY}}" | tr -d '\r' | ssh-add -
            ssh -o StrictHostKeyChecking=no ${{vars.SSH_HOST_PATH}} "pwd"
-           ssh -o StrictHostKeyChecking=no ${{vars.SSH_HOST_PATH}} "cd ${{vars.REMOTE_PATH}} && git pull origin dev"
+           ssh -o StrictHostKeyChecking=no ${{vars.SSH_HOST_PATH}} "cd ${{vars.REMOTE_PATH}} && pwd"
            ssh -o StrictHostKeyChecking=no $SSH_HOST "cd ${{vars.DOCKER_PATH}} && docker compose up -d --build server"
